@@ -27,11 +27,22 @@ const App = () => {
 
   const [state, setState] = useState<State>({});
   const {channel, messageId} = state;
-  const [clientReady, setClientReady] = useState(false);
+  const [clientReady, setClientReady] = useState(true);
 
   useEffect(() => {
     const setupClient = async () => {
-      await chatClient.connectUser(user, userToken);
+      console.log('setupClient');
+
+      try {
+        const connectUserREsult = await chatClient.connectUser(user, userToken);
+
+        console.log(connectUserREsult);
+      }
+      catch (e) {
+        console.error(e)
+      }
+
+
 
       setClientReady(true);
     };
